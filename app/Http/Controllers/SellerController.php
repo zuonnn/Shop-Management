@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seller;
 use Illuminate\Http\Request;
 
 class SellerController extends Controller
@@ -11,7 +12,8 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
+        $sellers = Seller::all();
+        return view('admin.sellers.index', ['sellers' => $sellers]);
     }
 
     /**
@@ -19,7 +21,7 @@ class SellerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.sellers.create');
     }
 
     /**
@@ -27,7 +29,18 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (strlen($request->get('name'))==0)
+            return redirect('sellers')->with('error', 'Name is required');
+        $seller = new Seller();
+        $seller->name = $request->get('name');
+        $seller->phone = $request->get('phone');
+        $seller->email = $request->get('email');
+        $seller->address = $request->get('address');
+        $seller->birthday = $request->get('birthday');
+        $seller->username = $request->get('username');
+        $seller->password = $request->get('password');
+        $seller->save();
+        return redirect('/admin/sellers')->with('success', 'Seller has been successfully added');
     }
 
     /**
@@ -35,7 +48,8 @@ class SellerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $seller = Seller::find($id);
+        return view('admin.sellers.show', ['seller' => $seller]);
     }
 
     /**
@@ -43,7 +57,8 @@ class SellerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $seller = Seller::find($id);
+        return view('admin.sellers.edit', ['seller' => $seller]);
     }
 
     /**
@@ -51,7 +66,16 @@ class SellerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $seller = Seller::find($id);
+        $seller->name = $request->get('name');
+        $seller->phone = $request->get('phone');
+        $seller->email = $request->get('email');
+        $seller->address = $request->get('address');
+        $seller->phone = $request->get('birthday');
+        // $seller->username = $request->get('username');
+        // $seller->password = $request->get('password');
+        $seller->save();
+        return redirect('/admin/sellers');
     }
 
     /**
@@ -59,6 +83,8 @@ class SellerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $seller = Seller::find($id);
+        $seller->delete();
+        return redirect('/admin/sellers');
     }
 }
