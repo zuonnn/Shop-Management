@@ -19,13 +19,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="seller/add" class="nav-link">
+              <a href="/admin/sellers/create" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Add Seller</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="seller" class="nav-link">
+              <a href="/admin/sellers" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>List Seller</p>
               </a>
@@ -33,7 +33,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="product" class="nav-link">
+          <a href="products" class="nav-link">
             <i class="nav-icon fas fa-shopping-cart"></i>
             <p>
               Product
@@ -48,7 +48,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="product" class="nav-link">
+              <a href="products" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>List Product</p>
               </a>

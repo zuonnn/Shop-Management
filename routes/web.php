@@ -12,4 +12,4 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/admin/home',[AdminController::class, 'index'])->name('admin');
 });
 
-Route::resource('admin/seller',SellerController::class);
+Route::resource('admin/sellers',SellerController::class);
