@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('price');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('brand_id')->constrained('brands');
+            $table->integer('stock_quantity');
             $table->timestamps();
         });
     }
