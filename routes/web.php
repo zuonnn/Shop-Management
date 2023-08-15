@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
@@ -13,5 +15,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/admin/home',[AdminController::class, 'index'])->name('admin');
     Route::resource('admin/sellers',SellerController::class);
     Route::resource('admin/products',ProductController::class);
+    Route::resource('admin/brands',BrandController::class);
+    Route::resource('admin/categories',CategoryController::class);
 });
 

@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin.categories.index', ['categories' => $categories]);
     }
 
     /**
@@ -19,7 +18,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -27,7 +26,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (strlen($request->get('name'))==0)
+            return redirect('categories')->with('error', 'Name is required');
+        $categorie = new Category();
+        $categorie->name = $request->get('name');
+        $categorie->save();
+        return redirect('/admin/categories')->with('success', 'categorie has been successfully added');
     }
 
     /**
@@ -35,7 +39,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $categorie = Category::find($id);
+        return view('admin.categories.show', ['categorie' => $categorie]);
     }
 
     /**
@@ -43,7 +48,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categorie = Category::find($id);
+        return view('admin.categories.edit', ['categorie' => $categorie]);
     }
 
     /**
@@ -51,7 +57,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $categorie = Category::find($id);
+        $categorie->name = $request->get('name');
+        $categorie->save();
+        return redirect('/admin/categories');
     }
 
     /**
@@ -59,6 +68,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $categorie = Category::find($id);
+        $categorie->delete();
+        return redirect('/admin/categories');
     }
 }
+
