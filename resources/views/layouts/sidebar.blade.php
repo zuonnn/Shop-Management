@@ -42,13 +42,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="products/add" class="nav-link">
+              <a href="/admin/products/create" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Add Product</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="products" class="nav-link">
+              <a href="/admin/products" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>List Product</p>
               </a>
