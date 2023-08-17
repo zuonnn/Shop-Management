@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -21,7 +23,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $brands = Brand::all();
+        $categories = Category::all();
+        return view('admin.products.create', ['brands' => $brands, 'categories' => $categories]);
     }
 
     /**
@@ -33,12 +37,10 @@ class ProductController extends Controller
             return redirect('products')->with('error', 'Name is required');
         $product = new Product();
         $product->name = $request->get('name');
-        $product->phone = $request->get('phone');
-        $product->email = $request->get('email');
-        $product->address = $request->get('address');
-        $product->birthday = $request->get('birthday');
-        $product->username = $request->get('username');
-        $product->password = $request->get('password');
+        $product->price = $request->get('price');
+        $product->stock_quantity = $request->get('stock_quantity');
+        $product->brand_id = $request->brand_id;
+        $product->category_id = $request->category_id;
         $product->save();
         return redirect('/admin/products')->with('success', 'Product has been successfully added');
     }
@@ -68,12 +70,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->name = $request->get('name');
-        $product->phone = $request->get('phone');
-        $product->email = $request->get('email');
-        $product->address = $request->get('address');
-        $product->phone = $request->get('birthday');
-        // $product->username = $request->get('username');
-        // $product->password = $request->get('password');
+        $product->price = $request->get('price');
+        $product->stock_quantity = $request->get('stock_quantity');
+        $product->brands()->sync($request->brands);
+        $product->categories()->sync($request->categories);
         $product->save();
         return redirect('/admin/products');
     }

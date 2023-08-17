@@ -7,9 +7,10 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Stock Quantity</th>
                 <th>Brand</th>
                 <th>Category</th>
+                <th>Stock Quantity</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -17,9 +18,9 @@
             <tr>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
-                <td>{{ $product->stock_quantity }}</td>
                 <td><a href="/categories/{{ $product->category->id }}">{{ $product->category->name }}</a></td>
                 <td><a href="/brands/{{ $product->brand->id }}">{{ $product->brand->name }}</a></td>
+                <td>{{ $product->stock_quantity }}</td>
                 <td class="action-button">
                     <a href="products/{{$product->id}}" class="btn btn-info">Show</a>
                     <a href="products/{{$product->id}}/edit" class="btn btn-primary">Edit</a>
