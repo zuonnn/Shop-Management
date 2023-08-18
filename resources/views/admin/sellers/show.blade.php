@@ -3,14 +3,14 @@
 @section('main')
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">{{$seller->name}}</h4>
-        <p class="card-text">{{$seller->address}}</p>
-        <p class="card-text">{{ $seller->phone }}</p>
-        <p class="card-text">{{ $seller->email }}</p>
-        <p class="card-text">{{ $seller->birthday }}</p>
-        <p class="card-text">{{ $seller->address }}</p>
-        <p class="card-text">{{ $seller->username }}</p>
-        <p class="card-text">{{ $seller->password }}</p>
+        <h4 class="card-title">Full name: {{$seller->name}}</h4>
+        <br><br>
+        <p class="card-text">Phone: {{ $seller->phone }}</p>
+        <p class="card-text">Email: {{ $seller->email }}</p>
+        <p class="card-text">Birthday: {{ $seller->birthday }}</p>
+        <p class="card-text">Address: {{$seller->address}}</p>
+        <p class="card-text">Username: {{ $seller->user->username }}</p>
+        <p class="card-text">Password: Password hidden for security</p>
     </div>
 </div>
 @endsection

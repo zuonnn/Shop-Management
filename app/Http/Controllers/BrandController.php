@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $brands = Brand::all();
+        return view('admin.brands.index', ['brands' => $brands]);
     }
 
     /**
@@ -19,7 +18,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brands.create');
     }
 
     /**
@@ -27,7 +26,12 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (strlen($request->get('name'))==0)
+            return redirect('brands')->with('error', 'Name is required');
+        $brand = new Brand();
+        $brand->name = $request->get('name');
+        $brand->save();
+        return redirect('/admin/brands')->with('success', 'Brand has been successfully added');
     }
 
     /**
@@ -35,7 +39,8 @@ class BrandController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $brand = Brand::find($id);
+        return view('admin.brands.show', ['brand' => $brand]);
     }
 
     /**
@@ -43,7 +48,8 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $brand = Brand::find($id);
+        return view('admin.brands.edit', ['brand' => $brand]);
     }
 
     /**
@@ -51,7 +57,10 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $brand = Brand::find($id);
+        $brand->name = $request->get('name');
+        $brand->save();
+        return redirect('/admin/brands');
     }
 
     /**
@@ -59,6 +68,8 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $brand = Brand::find($id);
+        $brand->delete();
+        return redirect('/admin/brands');
     }
 }

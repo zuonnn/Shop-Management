@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -11,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('admin.products.index', ['products' => $products]);
     }
 
     /**
@@ -19,7 +23,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brand::all();
+        $categories = Category::all();
+        return view('admin.products.create', ['brands' => $brands, 'categories' => $categories]);
     }
 
     /**
@@ -27,7 +33,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (strlen($request->get('name'))==0)
+            return redirect('products')->with('error', 'Name is required');
+        $product = new Product();
+        $product->name = $request->get('name');
+        $product->price = $request->get('price');
+        $product->stock_quantity = $request->get('stock_quantity');
+        $product->brand_id = $request->brand_id;
+        $product->category_id = $request->category_id;
+        $product->save();
+        return redirect('/admin/products')->with('success', 'Product has been successfully added');
     }
 
     /**
@@ -35,7 +50,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::find($id);
+        return view('admin.products.show', ['product' => $product]);
     }
 
     /**
@@ -43,7 +59,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        return view('admin.products.edit', ['product' => $product]);
     }
 
     /**
@@ -51,7 +68,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->name = $request->get('name');
+        $product->price = $request->get('price');
+        $product->stock_quantity = $request->get('stock_quantity');
+        $product->brands()->sync($request->brands);
+        $product->categories()->sync($request->categories);
+        $product->save();
+        return redirect('/admin/products');
     }
 
     /**
@@ -59,6 +83,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/admin/products');
     }
 }

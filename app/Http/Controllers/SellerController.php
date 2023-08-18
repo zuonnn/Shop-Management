@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SellerController extends Controller
 {
@@ -29,19 +31,38 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
-        if (strlen($request->get('name'))==0)
-            return redirect('sellers')->with('error', 'Name is required');
+        // Validate form data
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'birthday' => 'required',
+            'username' => 'required|unique:users',
+            'password' => 'required',
+        ]);
+
+        // Create a new User
+        $user = new User();
+        $user->name = $validatedData['name'];
+        $user->username = $validatedData['username'];
+        $user->password = bcrypt($validatedData['password']); // Hash the password
+        $user->save();
+
+        // Create a new Seller associated with the User
         $seller = new Seller();
-        $seller->name = $request->get('name');
-        $seller->phone = $request->get('phone');
-        $seller->email = $request->get('email');
-        $seller->address = $request->get('address');
-        $seller->birthday = $request->get('birthday');
-        $seller->username = $request->get('username');
-        $seller->password = $request->get('password');
+        $seller->name = $validatedData['name'];
+        $seller->phone = $validatedData['phone'];
+        $seller->email = $validatedData['email'];
+        $seller->address = $validatedData['address'];
+        $seller->birthday = $validatedData['birthday'];
+        $seller->user_id = $user->id; // Link the seller to the user
         $seller->save();
+
         return redirect('/admin/sellers')->with('success', 'Seller has been successfully added');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -67,16 +88,26 @@ class SellerController extends Controller
     public function update(Request $request, string $id)
     {
         $seller = Seller::find($id);
-        $seller->name = $request->get('name');
-        $seller->phone = $request->get('phone');
-        $seller->email = $request->get('email');
-        $seller->address = $request->get('address');
-        $seller->phone = $request->get('birthday');
-        // $seller->username = $request->get('username');
-        // $seller->password = $request->get('password');
+
+        // Update seller fields
+        $seller->name = $request->input('name');
+        $seller->phone = $request->input('phone');
+        $seller->email = $request->input('email');
+        $seller->address = $request->input('address');
+        $seller->birthday = $request->input('birthday');
         $seller->save();
+
+        // Update associated user's name and password
+        $user = $seller->user;
+        $user->name = $request->input('name');
+        $user->password = Hash::make($request->input('password')); // Update password and hash it
+        $user->save();
+
         return redirect('/admin/sellers');
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.

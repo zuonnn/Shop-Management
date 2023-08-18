@@ -27,11 +27,11 @@
         </div>
         <div class="form-group">
             <label for="phone">Username</label>
-            <input disabled class="form-control" type="text" placeholder="Enter seller username" name="username" id="username" value="{{$seller->username}}">
+            <input disabled class="form-control" type="text" placeholder="Enter seller username" name="username" id="username" value="{{$seller->user->username}}">
         </div>
         <div class="form-group">
             <label for="phone">Password</label>
-            <input class="form-control" type="text" placeholder="Enter seller password" name="password" id="password" value="{{$seller->password}}">
+            <input class="form-control" type="text" placeholder="Enter seller password" name="password" id="password" value="">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

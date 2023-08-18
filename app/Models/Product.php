@@ -12,8 +12,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'price',
-        'brand_id',
-        'category_id',
+        'stock_quantity'
     ];
     public function brand() {
         return $this->belongsTo(Brand::class);
@@ -21,8 +20,11 @@ class Product extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
-    public function order() {
-        return $this->belongsToMany(Order::class);
+    public function order_detail() {
+        return $this->belongsTo(OrderDetail::class);
     }
-
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }
