@@ -14,7 +14,7 @@ class LoginController extends Controller
             'title' => 'Login Page'
         ]);
     }
-    public function store(Request $request) {
+    public function login(Request $request) {
         $this -> validate($request, [
             'username' => 'required|string',
             'password' => 'required|string'
