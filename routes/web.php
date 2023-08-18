@@ -9,16 +9,20 @@ use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthenticateController::class, 'loginIndex'])->name('login');
-Route::post('/login', [AuthenticateController::class, 'login'])->name('login'); // Fixed route definition
+Route::post('/login', [AuthenticateController::class, 'login'])->name('login'); 
 Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth'])->group(function() {
-    Route::get('/admin/home',[AdminController::class, 'index'])->name('admin');
-    Route::resource('admin/sellers',SellerController::class);
-    Route::resource('admin/products',ProductController::class);
-    Route::resource('admin/brands',BrandController::class);
-    Route::resource('admin/categories',CategoryController::class);
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/home', [AdminController::class, 'index'])->name('admin');
+    Route::resource('admin/sellers', SellerController::class);
+    Route::resource('admin/products', ProductController::class);
+    Route::resource('admin/brands', BrandController::class);
+    Route::resource('admin/categories', CategoryController::class);
 });
 
-Route::get('/home/pay', [HomeController::class, 'index']);
+Route::middleware(['auth', 'seller'])->group(function () {
+    Route::get('/seller', [HomeController::class, 'index'])->name('seller');
+});
+
+
 

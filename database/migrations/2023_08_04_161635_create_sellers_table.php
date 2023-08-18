@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email', 255);
             $table->string('address', 255);
             $table->string('birthday', 255);
-            $table->foreignId('user_id')->constrained('users'); // Foreign key reference to users
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key reference to users
             $table->timestamps();
         });
     }

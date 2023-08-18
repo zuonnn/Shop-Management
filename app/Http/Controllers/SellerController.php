@@ -118,4 +118,4 @@ class SellerController extends Controller
         $seller->delete();
         return redirect('/admin/sellers');
     }
-}
+}   
