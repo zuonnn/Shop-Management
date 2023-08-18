@@ -21,10 +21,10 @@
                 <td>{{ $seller->name }}</td>
                 <td>{{ $seller->phone }}</td>
                 <td>{{ $seller->email }}</td>
-                <td>{{ $seller->birthday }}</td>
                 <td>{{ $seller->address }}</td>
-                <td>{{ $seller->username }}</td>
-                <td>{{ $seller->password }}</td>
+                <td>{{ $seller->birthday }}</td>
+                <td>{{ $seller->user->username }}</td>
+                <td>Password hidden for security</td>
                 <td class="action-button">
                     <a href="sellers/{{$seller->id}}" class="btn btn-info">Show</a>
                     <a href="sellers/{{$seller->id}}/edit" class="btn btn-primary">Edit</a>

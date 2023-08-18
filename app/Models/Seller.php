@@ -15,7 +15,9 @@ class Seller extends Model
         'email',
         'address',
         'birthday',
-        'username',
-        'password',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class); // Assuming User is your User model class
+    }
 }

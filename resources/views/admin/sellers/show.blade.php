@@ -9,8 +9,8 @@
         <p class="card-text">Email: {{ $seller->email }}</p>
         <p class="card-text">Birthday: {{ $seller->birthday }}</p>
         <p class="card-text">Address: {{$seller->address}}</p>
-        <p class="card-text">Username: {{ $seller->username }}</p>
-        <p class="card-text">Password: {{ $seller->password }}</p>
+        <p class="card-text">Username: {{ $seller->user->username }}</p>
+        <p class="card-text">Password: Password hidden for security</p>
     </div>
 </div>
 @endsection
