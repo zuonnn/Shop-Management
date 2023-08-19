@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('birthday');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key reference to users
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
