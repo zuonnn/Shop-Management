@@ -4,13 +4,14 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthenticateController::class, 'loginIndex'])->name('login');
 Route::post('/login', [AuthenticateController::class, 'login'])->name('login'); 
-Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/home', [AdminController::class, 'index'])->name('admin');
