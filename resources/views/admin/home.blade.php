@@ -21,41 +21,45 @@
             <button type="submit" class="btn btn-primary">Filter</button>
         </form>
         
-        @foreach($seller->orders as $order)
-            <tr>
-                <td>{{ $order->id }}</td>
-                <td>{{ $order->order_date }}</td>
-                <td>
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#orderDetails{{ $order->id }}">View Details</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <div id="orderDetails{{ $order->id }}" class="collapse">
-                        @if($order->orderDetails && count($order->orderDetails) > 0)
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($order->orderDetails as $orderDetail)
+        @foreach($sellers as $seller)
+    <!-- Loop through each seller's orders -->
+            @foreach($seller->orders as $order)
+                <tr>
+                    <td>{{ $order->id }}</td>
+                    <td>{{ $order->order_date }}</td>
+                    <td>
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#orderDetails{{ $order->id }}">View Details</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div id="orderDetails{{ $order->id }}" class="collapse">
+                            @if($order->orderDetails && count($order->orderDetails) > 0)
+                                <table class="table table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $orderDetail->product->name }}</td>
-                                            <td>{{ $orderDetail->quantity }}</td>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
                                         </tr>
-                                        <!-- Hiển thị thông tin orderDetails khác tại đây -->
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        @else
-                            <p>No order details available for this order.</p>
-                        @endif
-                    </div>
-                </td>
-            </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($order->orderDetails as $orderDetail)
+                                            <tr>
+                                                <td>{{ $orderDetail->product->name }}</td>
+                                                <td>{{ $orderDetail->quantity }}</td>
+                                            </tr>
+                                            <!-- Hiển thị thông tin orderDetails khác tại đây -->
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <p>No order details available for this order.</p>
+                            @endif
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
         @endforeach
+
     </div>
 @endsection

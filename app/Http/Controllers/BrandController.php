@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -37,10 +38,15 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $brand = Brand::find($id);
-        return view('admin.brands.show', ['brand' => $brand]);
+        // Lấy thông tin Brand
+        $brand = Brand::findOrFail($id);
+
+        // Lấy tất cả sản phẩm thuộc Brand này cùng với thông tin Category của chúng
+        $products = Product::where('brand_id', $id)->with('category')->get();
+
+        return view('admin.brands.show', compact('brand', 'products'));
     }
 
     /**

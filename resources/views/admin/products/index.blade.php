@@ -18,8 +18,8 @@
                         <tr>
                             <td>{{ $product->name }}</td>
                             <td>${{ $product->price }}</td>
-                            <td><a href="/brands/{{ $product->brand->id }}">{{ $product->brand->name }}</a></td>
-                            <td><a href="/categories/{{ $product->category->id }}">{{ $product->category->name }}</a></td>
+                            <td><a href="/admin/brands/{{ $product->brand->id }}">{{ $product->brand->name }}</a></td>
+                            <td><a href="/admin/categories/{{ $product->category->id }}">{{ $product->category->name }}</a></td>
                             <td>{{ $product->stock_quantity }}</td>
                             <td class="action-button">
                                 <a href="products/{{$product->id}}" class="btn btn-info">Show</a>

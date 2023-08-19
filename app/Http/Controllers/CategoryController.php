@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -37,10 +38,15 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $categorie = Category::find($id);
-        return view('admin.categories.show', ['categorie' => $categorie]);
+        // Lấy thông tin Category
+        $category = Category::findOrFail($id);
+
+        // Lấy tất cả sản phẩm thuộc Category này cùng với thông tin Brand của chúng
+        $products = Product::where('category_id', $id)->with('category')->get();
+
+        return view('admin.categories.show', compact('category', 'products'));
     }
 
     /**
