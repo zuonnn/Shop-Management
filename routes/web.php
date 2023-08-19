@@ -25,5 +25,7 @@ Route::middleware(['auth', 'seller'])->group(function () {
     Route::get('/seller', [HomeController::class, 'index'])->name('seller');
 });
 
+// routes.php
+Route::get('/search', 'SearchController@search');
 
 
