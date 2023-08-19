@@ -18,6 +18,16 @@ class Seller extends Model
     ];
     public function user()
     {
-        return $this->belongsTo(User::class); // Assuming User is your User model class
+        return $this->belongsTo(User::class);
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function totalIncome()
+    {
+        return $this->orders->sum('total_amount');
+    }
+
 }

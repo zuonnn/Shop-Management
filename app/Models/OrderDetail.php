@@ -11,7 +11,7 @@ class OrderDetail extends Model
     protected $table = 'order_details';
     protected $fillable = ['order_date'];
     public function products() {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
     public function order() {
         return $this->belongsTo(Order::class);
