@@ -115,7 +115,38 @@ class SellerController extends Controller
     public function destroy(string $id)
     {
         $seller = Seller::find($id);
+
+        // Trước khi xóa Seller, hãy lấy thông tin User liên quan
+        $user = $seller->user;
+
+        // Sau đó, xóa Seller
         $seller->delete();
+
+        // Nếu Seller đã bị xóa thành công (soft deleted), thì xóa User
+        if ($seller->trashed()) {
+            $user->delete();
+        }
+
         return redirect('/admin/sellers');
+    }
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        // Sự kiện "deleting" của model Seller
+        static::deleting(function ($seller) {
+            // Trước khi xóa Seller, hãy lấy thông tin User liên quan
+            $user = $seller->user;
+
+            // Sau đó, xóa Seller
+            $seller->delete();
+
+            // Nếu Seller đã bị xóa thành công, thì xóa User
+            if ($seller->trashed()) {
+                $user->delete();
+            }
+        });
     }
 }   

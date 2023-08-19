@@ -2,8 +2,8 @@
 @section('title','List Seller')
 @section('main')
 <div class="table-responsive">
-    <table class="table table-primary">
-        <thead>
+    <table class="table table-striped">
+        <thead class="table-primary">
             <tr>
                 <th>Name</th>
                 <th>Phone</th>
@@ -28,17 +28,16 @@
                 <td class="action-button">
                     <a href="sellers/{{$seller->id}}" class="btn btn-info">Show</a>
                     <a href="sellers/{{$seller->id}}/edit" class="btn btn-primary">Edit</a>
-                    <a>
-                        <form action="sellers/{{$seller->id}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger mt-2" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
-                    </a>
+                    <form action="sellers/{{$seller->id}}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-  </div>
+</div>
+
 @endsection

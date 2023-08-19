@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('phone', 255);
             $table->string('email', 255);
             $table->string('address', 255);
-            $table->string('birthday', 255);
+            $table->date('birthday');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key reference to users
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
