@@ -60,8 +60,11 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::find($id);
-        return view('admin.products.edit', ['product' => $product]);
+        $brands = Brand::all();
+        $categories = Category::all();
+        return view('admin.products.edit', ['product' => $product, 'brands' => $brands, 'categories' => $categories]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -72,11 +75,12 @@ class ProductController extends Controller
         $product->name = $request->get('name');
         $product->price = $request->get('price');
         $product->stock_quantity = $request->get('stock_quantity');
-        $product->brands()->sync($request->brands);
-        $product->categories()->sync($request->categories);
+        $product->brand_id = $request->get('brand_id'); // Cập nhật brand_id
+        $product->category_id = $request->get('category_id'); // Cập nhật category_id
         $product->save();
         return redirect('/admin/products');
     }
+
 
     /**
      * Remove the specified resource from storage.

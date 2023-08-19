@@ -3,7 +3,7 @@
 @section('main')
     <div class="container">
         <h1>Edit Category</h1>
-        <form action="/admin/{{$category->id}}" method="post">
+        <form action="/admin/categories/{{$category->id}}" method="post">
             @method('PUT')
             @csrf
             <div class="form-group">
