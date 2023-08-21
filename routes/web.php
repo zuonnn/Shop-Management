@@ -26,6 +26,8 @@ Route::middleware(['auth', 'seller'])->group(function () {
 });
 
 // routes.php
-Route::get('/search', 'SearchController@search');
+Route::post('/search', [ProductController::class, 'search'])->name('search');
+Route::post('/addproduct', [ProductController::class, 'addProduct'])->name('addproduct');
+Route::delete('/delete-product/{productId}', [ProductController::class, 'deleteProduct'])->name('delete.product');
 
 

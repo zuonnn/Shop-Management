@@ -1,4 +1,4 @@
-    <!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -17,79 +17,111 @@
 
 <body>
     <header>
-{{-- search/logout --}}
-  <div class="input-group ps-5" style="margin-top: 10px; background-color: rgb(57, 126, 237)">
-    <form action="" method="GET">
-    <div class="d-flex align-items-center" style="width: 1450px; margin: 5px">
-      <div id="navbar-search-autocomplete" class="form-outline d-flex flex-direction-column" style="width: 500px">
-          <input type="search" class="form-control" name="tukhoa" placeholder="Tìm hàng hóa" />
-          <button type="button" class="btn btn-primary"
-              style="background-color:aliceblue; color: #ffff; border: 2px solid #ffff">
-              <i class="fas fa-search" style="color: black"></i>
-          </button>
-      </div>
-      <div class="container ms-3" style="display: flex; justify-content: flex-end; ">
-        <i class="fas fa-sign-out-alt me-2"></i>
-      </div>
-    </div>
-    </form>
-  </div>
-{{-- search/logout --}}
+        {{-- search/logout --}}
+        <div class="input-group ps-5" style="margin-top: 10px; background-color: rgb(57, 126, 237)">
+            <div class="d-flex align-items-center" style="width: 1450px; margin: 5px">
+                <form action="{{ route('search') }}" method="POST">
+                    @csrf
+                    <div id="navbar-search-autocomplete" class="form-outline d-flex flex-direction-column"
+                        style="width: 500px">
+                        <input type="search" class="form-control" name="query" placeholder="Tìm hàng hóa" />
+                        <button type="submit" class="btn btn-primary"
+                            style="background-color: aliceblue; color: #ffff; border: 2px solid #ffff">
+                            <i class="fas fa-search" style="color: black"></i>
+                        </button>
+                    </div>
+                </form>
+
+
+
+                <div class="container ms-3" style="display: flex; justify-content: flex-end; ">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-link" style="color: white; text-decoration: none;">
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{-- search/logout --}}
     </header>
 
     <main>
-{{-- Bên phải --}}
-  <div style="float: right; width: 33%; flex-direction: column; margin-top: 10px; color: #ffffff; height: 600px">
-    <div style = "display: flex; align-items:flex-start; flex-direction: column; height: 80%">
-        <div class="input-group">
-            <span class="input-group-text">Name</span>
-            <input type="text" class="form-control" placeholder="Ten khach hang">
-        </div>        
-        <div style="display: flex; flex-direction: row; width: 100%">
-            <p style="color: black; width: 100%; margin: 10px">Tổng tiền hàng</p>
-            <p style="color: black; width: 90%;margin: 10px; display: flex; justify-content: flex-end">0 </p>    
-        </div> 
-       
-        <div style="display: flex; flex-direction: row; width: 100%">
-            <b style="color: black; width: 100%; margin: 10px">Khách thanh toán</b>
-            <input type="text" class="form-control">    
+        {{-- Bên phải --}}
+        <div style="float: right; width: 33%; flex-direction: column; margin-top: 10px; color: #ffffff; height: 600px">
+            <div style="display: flex; align-items:flex-start; flex-direction: column; height: 80%">
+                <div class="input-group">
+                    <span class="input-group-text">Name</span>
+                    <input type="text" class="form-control" placeholder="Ten khach hang">
+                </div>
+                <div style="display: flex; flex-direction: row; width: 100%">
+                    <p style="color: black; width: 100%; margin: 10px">Tổng tiền hàng: </p>
+                    <p id="total-amount" style="color: black; width: 90%; margin: 10px; display: flex; justify-content: flex-end">${{ number_format($totalPrice, 2) }}</p>
+                </div>
+
+                <div style="display: flex; flex-direction: row; width: 100%">
+                    <b style="color: black; width: 100%; margin: 10px">Khách thanh toán</b>
+                    <input id="total-amount-paid" type="number" class="form-control">
+                </div>
+
+                <div style="display: flex; flex-direction: row; width: 100%">
+                    <b style="color: black; width: 100%; margin: 10px">Tiền thừa của khách</b>
+                    <p id="change" style="color: black; width: 90%;margin: 10px; display: flex; justify-content: flex-end">${{ number_format(session('total_amount_to_be_returned', 0), 2) }}</p>
+                </div>
+            </div>
+
+            <div class="d-grid gap-3">
+                <button type="button" class="btn btn-primary btn-block">THANH TOAN</button>
+            </div>
         </div>
-        
-        <div style="display: flex; flex-direction: row; width: 100%">
-            <b style="color: black; width: 100%; margin: 10px">Tiền thừa của khách</b>
-            <p style="color: black; width: 90%;margin: 10px; display: flex; justify-content: flex-end">0 </p>    
-        </div> 
-    </div>
 
-    <div class="d-grid gap-3">
-        <button type="button" class="btn btn-primary btn-block">THANH TOAN</button>
-    </div>
-  </div>
+        {{-- Bên phải --}}
 
-{{-- Bên phải --}}
-    
 
-{{-- Bên trái --}}
-  <div style="float: left; width: 65%; flex-direction: column; margin-top: 10px; margin-left: 10px; color: #ffffff; height: 600px">
-    <div style="width: 100%; height: 10%;">
-        <div style="display: flex; flex-direction: row; width: 100%">
-            <p style="color: black; width: 100%">1</p>
-            <p style="color: black; width: 100%">Sua Milo</p>
-            <button type="button" class="btn btn-secondary">
-                <i class="fas fa-minus"></i>
-            </button>
-            <p style="color: black; width: 100%; margin-left: 10%">10</p>
-            <button type="button" class="btn btn-secondary">
-                <i class="fas fa-plus"></i>
-            </button>
-            <p style="color: black; width: 100%; margin-left: 10%">8000 </p> 
-            <button class="btn btn-danger">
-                <i class="fa fa-trash"></i>
-            </button>
+        {{-- Bên trái --}}
+        <div
+            style="float: left; width: 65%; flex-direction: column; margin-top: 10px; margin-left: 10px; color: #ffffff; height: 600px">
+            < style="width: 100%; height: 10%;">
+                <div style="display: flex; flex-direction: row; width: 100%">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($products as $product)
+                                <tr>
+                                    <form action="{{ route('delete.product', ['productId' => $product['id']]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" class="form-control" name="id"
+                                            value="{{ $product['id'] }}">
+                                        <td>{{ $product['id'] }}</td>
+                                        <td>{{ $product['name'] }}</td>
+                                        <td>{{ $product['quantity'] }}</td>
+                                        <td>${{ $product['price'] }}</td>
+                                        <td>
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </form>
+
+                                </tr>
+                            @endforeach 
+                        </tbody>
+                    </table>
+                </div>
         </div>
-    </div>
-  </div>
-{{-- Bên trái --}}
+        </div>
     </main>
 
 
@@ -102,4 +134,29 @@
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Function to update the change to be given to the customer
+            function updateChange() {
+                // Get the total amount paid by the customer from the input field
+                var totalAmountPaid = parseFloat($('#total-amount-paid').val()) || 0;
+    
+                // Get the total price of products from the session
+                var totalPrice = parseFloat('{{ $totalPrice }}');
+    
+                // Calculate the change (ensure it's always positive)
+                var change = Math.max(totalAmountPaid - totalPrice, 0);
+    
+                // Update the change display
+                $('#change').text(change.toFixed(2)); // Display with two decimal places
+            }
+    
+            // Attach an event listener to the input field for total amount paid
+            $('#total-amount-paid').on('input', updateChange);
+        });
+    </script>
+    
+    
 </html>
