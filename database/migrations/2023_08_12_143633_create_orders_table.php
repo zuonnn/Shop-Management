@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('seller_id')->constrained('sellers');
             $table->dateTime('order_date');
+            $table->integer('total_price');
+            $table->string('pdf');
             $table->timestamps();
         });
     }

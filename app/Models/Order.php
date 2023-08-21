@@ -10,12 +10,11 @@ class Order extends Model
     use HasFactory;
     protected $table = 'orders';
     protected $fillable = [
-        'quantity',
-        'total',
+        'order_date',
+        'total_price',
+        'pdf'
     ];
-    public function order_detail() {
-        return $this->hasMany(OrderDetail::class);
-    }
+
     public function seller() {
         return $this->belongsTo(Seller::class);
     }

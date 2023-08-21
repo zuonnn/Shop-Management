@@ -1,8 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Edit Category')
+@section('title', 'Edit Category: ' . $category->name)
 @section('main')
     <div class="container">
-        <h1>Edit Category</h1>
         <form action="/admin/categories/{{$category->id}}" method="post">
             @method('PUT')
             @csrf

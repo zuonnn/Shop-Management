@@ -41,6 +41,10 @@ class ProductController extends Controller
         $product->name = $request->get('name');
         $product->price = $request->get('price');
         $product->stock_quantity = $request->get('stock_quantity');
+        if ($request->hasFile('image')) {
+            $product->image = $request->file('image')->store('public/images');
+            $product->image = str_replace('public/', '/upload/', $product->image);
+        }
         $product->brand_id = $request->brand_id;
         $product->category_id = $request->category_id;
         $product->save();
@@ -77,8 +81,12 @@ class ProductController extends Controller
         $product->name = $request->get('name');
         $product->price = $request->get('price');
         $product->stock_quantity = $request->get('stock_quantity');
-        $product->brand_id = $request->get('brand_id'); // Cập nhật brand_id
-        $product->category_id = $request->get('category_id'); // Cập nhật category_id
+        if ($request->hasFile('image')) {
+            $product->image = $request->file('image')->store('public/images');
+            $product->image = str_replace('public/', '/upload/', $product->image);
+        }
+        $product->brand_id = $request->get('brand_id');
+        $product->category_id = $request->get('category_id');
         $product->save();
         return redirect('/admin/products');
     }

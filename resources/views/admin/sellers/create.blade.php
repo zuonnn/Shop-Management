@@ -2,7 +2,6 @@
 @section('title', 'Create Seller')
 @section('main')
     <div class="container">
-        <h1>Create Seller</h1>
         <form action="/admin/sellers" method="post">
             @csrf
             <div class="form-group">

@@ -1,8 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Edit Brand')
+@section('title', 'Edit Brand: ' . $brand->name)
 @section('main')
     <div class="container">
-        <h1>Edit Brand</h1>
         <form action="/admin/brands/{{$brand->id}}" method="post">
             @method('PUT')
             @csrf

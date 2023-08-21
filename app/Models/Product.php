@@ -12,24 +12,13 @@ class Product extends Model
     protected $fillable = [
         'name',
         'price',
-        'stock_quantity'
+        'stock_quantity',
+        'image'
     ];
     public function brand() {
         return $this->belongsTo(Brand::class);
     }
     public function category() {
         return $this->belongsTo(Category::class);
-    }
-    public function order_detail() {
-        return $this->hasOne(OrderDetail::class);
-    }
-    public function user()
-    {
-    return $this->belongsTo(User::class);
-    }
-
-    public function search()
-    {
-        
     }
 }

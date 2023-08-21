@@ -1,8 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Edit Product')
+@section('title', 'Edit Product: '. $product->name)
 @section('main')
     <div class="container">
-        <h1>Edit Product</h1>
         <form action="/admin/products/{{$product->id}}" method="post">
             @method('PUT')
             @csrf
@@ -33,6 +32,11 @@
                         <option value="{{$brand->id}}" @if($brand->id == $product->brand_id) selected @endif>{{$brand->name}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label><br>
+                <img src="{{ asset($product->image) }}" class="image" alt="Product Image" style="width: 200px; height: 200px">
+                <input type="file" placeholder="Enter product image" name="image" id="image">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

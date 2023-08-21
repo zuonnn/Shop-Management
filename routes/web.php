@@ -15,6 +15,7 @@ Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout'
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/home', [AdminController::class, 'index'])->name('admin');
+    Route::post('/admin/home', [AdminController::class, 'index'])->name('admin');
     Route::resource('admin/sellers', SellerController::class);
     Route::resource('admin/products', ProductController::class);
     Route::resource('admin/brands', BrandController::class);
@@ -23,11 +24,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'seller'])->group(function () {
     Route::get('/seller', [HomeController::class, 'index'])->name('seller');
+    Route::post('/search', [ProductController::class, 'search'])->name('search');
+    Route::post('/addproduct', [ProductController::class, 'addProduct'])->name('addproduct');
+    Route::delete('/delete-product/{productId}', [ProductController::class, 'deleteProduct'])->name('delete.product');
 });
 
-// routes.php
-Route::post('/search', [ProductController::class, 'search'])->name('search');
-Route::post('/addproduct', [ProductController::class, 'addProduct'])->name('addproduct');
-Route::delete('/delete-product/{productId}', [ProductController::class, 'deleteProduct'])->name('delete.product');
+
 
 

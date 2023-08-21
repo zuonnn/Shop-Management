@@ -2,7 +2,6 @@
 @section('title', 'Create Category')
 @section('main')
     <div class="container">
-        <h1>Create Category</h1>
         <form action="/admin/categories" method="post">
             @csrf
             <div class="form-group">

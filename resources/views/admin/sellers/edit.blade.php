@@ -1,8 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Update Seller')
+@section('title', 'Update Seller: ' .$seller->name)
 @section('main')
     <div class="container">
-        <h1>Update Seller: {{ $seller->name }}</h1>
         <form action="/admin/sellers/{{ $seller->id }}" method="post">
             @csrf
             @method('PUT')

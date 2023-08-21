@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->integer('stock_quantity');
+            $table->string('image');
             $table->timestamps();
         });
     }

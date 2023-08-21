@@ -6,6 +6,7 @@
                 <thead class="table-primary">
                     <tr>
                         <th>Name</th>
+                        <th>Image</th>
                         <th>Price</th>
                         <th>Brand</th>
                         <th>Category</th>
@@ -17,7 +18,8 @@
                     @foreach($products as $product)
                         <tr>
                             <td>{{ $product->name }}</td>
-                            <td>${{ $product->price }}</td>
+                            <td><img src="{{ asset($product->image) }}" class="image" alt="Product Image" style="width: 100px; height: 100px"></td>
+                            <td>{{ $product->price }}</td>
                             <td><a href="/admin/brands/{{ $product->brand->id }}">{{ $product->brand->name }}</a></td>
                             <td><a href="/admin/categories/{{ $product->category->id }}">{{ $product->category->name }}</a></td>
                             <td>{{ $product->stock_quantity }}</td>

@@ -2,7 +2,6 @@
 @section('title', 'Create Product')
 @section('main')
     <div class="container">
-        <h1>Create Product</h1>
         <form action="/admin/products" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -34,8 +33,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="image">Product Image</label>
-                <input type="file" class="form-control-file" name="image" id="image">
+                <label for="image">Image</label><br>
+                <input type="file" placeholder="Enter product image" name="image" id="image">
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
