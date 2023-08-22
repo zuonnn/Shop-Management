@@ -10,6 +10,7 @@ use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthenticateController::class, 'loginIndex'])->name('login');
+Route::get('/', [AuthenticateController::class, 'loginIndex'])->name('login');
 Route::post('/login', [AuthenticateController::class, 'login'])->name('login'); 
 Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
@@ -20,6 +21,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/products', ProductController::class);
     Route::resource('admin/brands', BrandController::class);
     Route::resource('admin/categories', CategoryController::class);
+    // Thêm route để hiển thị danh sách đơn hàng và tải PDF
+    Route::get('/admin/orders', [AdminController::class, 'getOrders'])->name('admin.getOrders');
+    Route::get('/admin/view-pdf/{pdfFileName}', [AdminController::class, 'viewPDF'])->name('admin.viewPDF');
 });
 
 Route::middleware(['auth', 'seller'])->group(function () {
@@ -28,7 +32,3 @@ Route::middleware(['auth', 'seller'])->group(function () {
     Route::post('/addproduct', [ProductController::class, 'addProduct'])->name('addproduct');
     Route::delete('/delete-product/{productId}', [ProductController::class, 'deleteProduct'])->name('delete.product');
 });
-
-
-
-
