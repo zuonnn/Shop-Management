@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use SebastianBergmann\CodeCoverage\NoCodeCoverageDriverWithPathCoverageSupportAvailableException;
 
 class ProductController extends Controller
@@ -82,6 +83,7 @@ class ProductController extends Controller
         $product->price = $request->get('price');
         $product->stock_quantity = $request->get('stock_quantity');
         if ($request->hasFile('image')) {
+            Storage::delete(str_replace('/upload/','public/', $product->image));
             $product->image = $request->file('image')->store('public/images');
             $product->image = str_replace('public/', '/upload/', $product->image);
         }

@@ -2,7 +2,7 @@
 @section('title', 'Edit Product: '. $product->name)
 @section('main')
     <div class="container">
-        <form action="/admin/products/{{$product->id}}" method="post">
+        <form action="/admin/products/{{$product->id}}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
