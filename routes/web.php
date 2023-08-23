@@ -31,4 +31,5 @@ Route::middleware(['auth', 'seller'])->group(function () {
     Route::post('/search', [ProductController::class, 'search'])->name('search');
     Route::post('/addproduct', [ProductController::class, 'addProduct'])->name('addproduct');
     Route::delete('/delete-product/{productId}', [ProductController::class, 'deleteProduct'])->name('delete.product');
+    Route::get('/export-pdf', 'App\Http\Controllers\ProductController@exportPDF')->name('export-pdf');
 });

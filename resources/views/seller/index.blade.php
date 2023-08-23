@@ -52,10 +52,6 @@
         {{-- Bên phải --}}
         <div style="float: right; width: 33%; flex-direction: column; margin-top: 10px; color: #ffffff; height: 600px">
             <div style="display: flex; align-items:flex-start; flex-direction: column; height: 80%">
-                <div class="input-group">
-                    <span class="input-group-text">Name</span>
-                    <input type="text" class="form-control" placeholder="Ten khach hang">
-                </div>
                 <div style="display: flex; flex-direction: row; width: 100%">
                     <p style="color: black; width: 100%; margin: 10px">Tổng tiền hàng: </p>
                     <p id="total-amount" style="color: black; width: 90%; margin: 10px; display: flex; justify-content: flex-end">${{ number_format($totalPrice, 2) }}</p>
@@ -73,8 +69,10 @@
             </div>
 
             <div class="d-grid gap-3">
-                <button type="button" class="btn btn-primary btn-block">THANH TOAN</button>
+                <a href="{{ route('export-pdf') }}" class="btn btn-primary btn-block">THANH TOAN</a>
             </div>
+            
+                       
         </div>
 
         {{-- Bên phải --}}

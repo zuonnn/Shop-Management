@@ -11,6 +11,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "bootstrap-icons": "^1.10.5"
+        "bootstrap-icons": "^1.10.5",
+        "dom-to-image": "^2.6.0"
     }
 }
