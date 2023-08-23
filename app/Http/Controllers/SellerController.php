@@ -35,9 +35,6 @@ class SellerController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'phone' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
-            'birthday' => 'required',
             'username' => 'required|unique:users',
             'password' => 'required',
         ]);
@@ -53,14 +50,15 @@ class SellerController extends Controller
         $seller = new Seller();
         $seller->name = $validatedData['name'];
         $seller->phone = $validatedData['phone'];
-        $seller->email = $validatedData['email'];
-        $seller->address = $validatedData['address'];
-        $seller->birthday = $validatedData['birthday'];
+        $seller->email = $request->input('email');
+        $seller->address = $request->input('address'); 
+        $seller->birthday = $request->input('birthday'); 
         $seller->user_id = $user->id; // Link the seller to the user
         $seller->save();
 
         return redirect('/admin/sellers')->with('success', 'Seller has been successfully added');
     }
+
 
 
 

@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('phone', 255);
-            $table->string('email', 255);
-            $table->string('address', 255);
-            $table->date('birthday');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key reference to users
+            $table->string('phone', 10);
+            $table->string('email', 255)->nullable();
+            $table->string('address', 255)->nullable();
+            $table->date('birthday')->nullable();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });
