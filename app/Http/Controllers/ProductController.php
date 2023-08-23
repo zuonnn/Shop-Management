@@ -37,8 +37,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        if (strlen($request->get('name')) == 0)
-            return redirect('products')->with('error', 'Name is required');
         $product = new Product();
         $product->name = $request->get('name');
         $product->price = $request->get('price');
@@ -101,6 +99,11 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::find($id);
+        // Xóa ảnh cũ nếu nó tồn tại
+        if (Storage::exists(str_replace('/upload/','public/', $product->image))) {
+            Storage::delete(str_replace('/upload/','public/', $product->image));
+        }
+        // Xóa sản phẩm
         $product->delete();
         return redirect('/admin/products');
     }
