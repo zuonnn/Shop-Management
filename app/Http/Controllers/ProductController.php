@@ -100,6 +100,11 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::find($id);
+        // Xóa ảnh cũ nếu nó tồn tại
+        if (Storage::exists(str_replace('/upload/','public/', $product->image))) {
+            Storage::delete(str_replace('/upload/','public/', $product->image));
+        }
+        // Xóa sản phẩm
         $product->delete();
         return redirect('/admin/products');
     }
