@@ -36,8 +36,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        if (strlen($request->get('name'))==0)
-            return redirect('products')->with('error', 'Name is required');
         $product = new Product();
         $product->name = $request->get('name');
         $product->price = $request->get('price');
