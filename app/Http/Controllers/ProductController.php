@@ -205,7 +205,7 @@ class ProductController extends Controller
         $order = new Order();
         $order->order_date = now(); 
         $order->total_price = $totalPrice;
-        $order->seller_id = 1;
+        $order->seller_id = session('sellerID');
         $order->pdf = 1;
         $order->save();
 
