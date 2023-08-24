@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -124,6 +125,8 @@ class ProductController extends Controller
         $productName = $request->input('name');
         $quantity = $request->input('quantity');
         $price = $request->input('price');
+        // $sellerId = $request->input('seller_id');
+        // $seller = $request->input('name')
 
         // Create an array to store the product data
         $product = [
@@ -131,7 +134,10 @@ class ProductController extends Controller
             'name' => $productName,
             'quantity' => $quantity,
             'price' => $price,
+            // 'seller_id' => $sellerId,
         ];
+
+        
 
         // Add the product data to the session
         $products = session('products', []);
@@ -196,8 +202,14 @@ class ProductController extends Controller
 
         // Load a view with the data
         $pdf = PDF::loadView('exports.product-pdf', compact('products', 'totalPrice'));
+        $order = new Order();
+        $order->order_date = now(); 
+        $order->total_price = $totalPrice;
+        $order->seller_id = 1;
+        $order->pdf = 1;
+        $order->save();
 
         // Generate and export the PDF
-        return $pdf->download('product-information.pdf');
+        return $pdf->download('OrderShopChieuDuong.pdf');
     }
 }
