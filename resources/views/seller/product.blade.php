@@ -32,7 +32,7 @@
                             <!-- Display product information outside the form -->
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->name }}</td>
-                            <td>${{ $product->price }}</td>
+                            <td>{{ $product->price }}</td>
                             
                             <!-- The form to add the product to the session -->
                             <form action="{{ route('addproduct') }}" method="POST">

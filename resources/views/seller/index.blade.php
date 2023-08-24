@@ -105,7 +105,7 @@
                                         <td>{{ $product['id'] }}</td>
                                         <td>{{ $product['name'] }}</td>
                                         <td>{{ $product['quantity'] }}</td>
-                                        <td>${{ $product['price'] }}</td>
+                                        <td>{{ $product['price'] }}</td>
                                         <td>
                                             <button type="submit" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>
