@@ -28,6 +28,8 @@ class AuthenticateController extends Controller
             if (Auth::user()->role === 0) {
                 return redirect()->route('admin'); // Redirect to admin.home for admins
             } elseif (Auth::user()->role === 1) {
+                $seller = \App\Models\Seller::where('user_id', Auth::user()->id)->first();
+                session(['sellerID' => $seller->id]);
                 return redirect()->route('seller'); // Redirect to seller.index for sellers
             }
         }
