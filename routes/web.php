@@ -21,9 +21,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/products', ProductController::class);
     Route::resource('admin/brands', BrandController::class);
     Route::resource('admin/categories', CategoryController::class);
-    // Thêm route để hiển thị danh sách đơn hàng và tải PDF
-    Route::get('/admin/orders', [AdminController::class, 'getOrders'])->name('admin.getOrders');
-    Route::get('/admin/view-pdf/{pdfFileName}', [AdminController::class, 'viewPDF'])->name('admin.viewPDF');
 });
 
 Route::middleware(['auth', 'seller'])->group(function () {
