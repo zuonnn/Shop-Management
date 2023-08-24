@@ -54,7 +54,7 @@
             <div style="display: flex; align-items:flex-start; flex-direction: column; height: 80%">
                 <div style="display: flex; flex-direction: row; width: 100%">
                     <p style="color: black; width: 100%; margin: 10px">Total amount</p>
-                    <p id="total-amount" style="color: black; width: 90%; margin: 10px; display: flex; justify-content: flex-end">${{ number_format($totalPrice, 2) }}</p>
+                    <p id="total-amount" style="color: black; width: 90%; margin: 10px; display: flex; justify-content: flex-end">{{ number_format($totalPrice, 0) }}</p>
                 </div>
 
                 <div style="display: flex; flex-direction: row; width: 100%">
@@ -64,7 +64,7 @@
 
                 <div style="display: flex; flex-direction: row; width: 100%">
                     <b style="color: black; width: 100%; margin: 10px">Excess money to pay</b>
-                    <p id="change" style="color: black; width: 90%;margin: 10px; display: flex; justify-content: flex-end">${{ number_format(session('total_amount_to_be_returned', 0), 2) }}</p>
+                    <p id="change" style="color: black; width: 90%;margin: 10px; display: flex; justify-content: flex-end">{{ number_format(session('total_amount_to_be_returned', 0), 0) }}</p>
                 </div>
             </div>
 
@@ -136,22 +136,19 @@
 
     <script>
         $(document).ready(function () {
-            // Function to update the change to be given to the customer
+            
             function updateChange() {
-                // Get the total amount paid by the customer from the input field
+                
                 var totalAmountPaid = parseFloat($('#total-amount-paid').val()) || 0;
-    
-                // Get the total price of products from the session
+          
                 var totalPrice = parseFloat('{{ $totalPrice }}');
     
-                // Calculate the change (ensure it's always positive)
                 var change = Math.max(totalAmountPaid - totalPrice, 0);
-    
-                // Update the change display
-                $('#change').text(change.toFixed(2)); // Display with two decimal places
+
+                $('#change').text(change.toFixed(2)); 
             }
     
-            // Attach an event listener to the input field for total amount paid
+            
             $('#total-amount-paid').on('input', updateChange);
         });
     </script>
