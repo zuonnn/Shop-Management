@@ -86,11 +86,11 @@
                     <table class="table table-primary">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
+                                <th scope="col">NO</th>
+                                <th scope="col">PRODUCT NAME</th>
+                                <th scope="col">QUANTITY</th>
+                                <th scope="col">PRICE</th>
+                                <th scope="col">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>

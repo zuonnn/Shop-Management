@@ -125,8 +125,6 @@ class ProductController extends Controller
         $productName = $request->input('name');
         $quantity = $request->input('quantity');
         $price = $request->input('price');
-        // $sellerId = $request->input('seller_id');
-        // $seller = $request->input('name')
 
         // Create an array to store the product data
         $product = [
@@ -134,11 +132,7 @@ class ProductController extends Controller
             'name' => $productName,
             'quantity' => $quantity,
             'price' => $price,
-            // 'seller_id' => $sellerId,
         ];
-
-        
-
         // Add the product data to the session
         $products = session('products', []);
         $products[] = $product;
@@ -160,10 +154,8 @@ class ProductController extends Controller
         session(['total_price' => $totalPrice]);
         session(['total_amount_to_be_returned' => $totalAmountToBeReturned]);
 
-        // You can also flash a message to indicate that the product was added successfully
         session()->flash('success_message', 'Product added to session successfully.');
 
-        // Redirect back to the 'seller' route (adjust this route as needed)
         return Redirect::route('seller');
     }
 
