@@ -24,7 +24,7 @@
                     @csrf
                     <div id="navbar-search-autocomplete" class="form-outline d-flex flex-direction-column"
                         style="width: 500px">
-                        <input type="search" class="form-control" name="query" placeholder="Tìm hàng hóa" />
+                        <input type="search" class="form-control" name="query" placeholder="Search" />
                         <button type="submit" class="btn btn-primary"
                             style="background-color: aliceblue; color: #ffff; border: 2px solid #ffff">
                             <i class="fas fa-search" style="color: black"></i>
@@ -53,23 +53,23 @@
         <div style="float: right; width: 33%; flex-direction: column; margin-top: 10px; color: #ffffff; height: 600px">
             <div style="display: flex; align-items:flex-start; flex-direction: column; height: 80%">
                 <div style="display: flex; flex-direction: row; width: 100%">
-                    <p style="color: black; width: 100%; margin: 10px">Tổng tiền hàng: </p>
+                    <p style="color: black; width: 100%; margin: 10px">Total amount</p>
                     <p id="total-amount" style="color: black; width: 90%; margin: 10px; display: flex; justify-content: flex-end">${{ number_format($totalPrice, 2) }}</p>
                 </div>
 
                 <div style="display: flex; flex-direction: row; width: 100%">
-                    <b style="color: black; width: 100%; margin: 10px">Khách thanh toán</b>
+                    <b style="color: black; width: 100%; margin: 10px">Customer pays</b>
                     <input id="total-amount-paid" type="number" class="form-control">
                 </div>
 
                 <div style="display: flex; flex-direction: row; width: 100%">
-                    <b style="color: black; width: 100%; margin: 10px">Tiền thừa của khách</b>
+                    <b style="color: black; width: 100%; margin: 10px">Excess money to pay</b>
                     <p id="change" style="color: black; width: 90%;margin: 10px; display: flex; justify-content: flex-end">${{ number_format(session('total_amount_to_be_returned', 0), 2) }}</p>
                 </div>
             </div>
 
             <div class="d-grid gap-3">
-                <a href="{{ route('export-pdf') }}" class="btn btn-primary btn-block">THANH TOAN</a>
+                <a href="{{ route('export-pdf') }}" class="btn btn-primary btn-block">PAY</a>
             </div>
             
                        

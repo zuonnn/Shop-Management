@@ -19,10 +19,10 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Số lượng</th>
+                        <th>Quantity</th>
                         <th>Action</th>
                     </tr>
                 </thead>
